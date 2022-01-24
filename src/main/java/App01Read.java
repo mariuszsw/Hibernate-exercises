@@ -8,25 +8,17 @@ import javax.persistence.Persistence;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class  App01Create {
+public class App01Read {
 
-    private static final Logger logger = LogManager.getLogger(App01Create.class);
+    private static final Logger logger = LogManager.getLogger(App01Read.class);
     private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unit");
 
     public static void main(String[] args) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
 
-        Product product = new Product();
+        Product product = em.find(Product.class, 1L);
 
-        product.setName("Rower 01");
-        product.setDescription("Opis produktu 01");
-        product.setCreated(LocalDateTime.now());
-        product.setUpdated(LocalDateTime.now());
-        product.setPrice(new BigDecimal("19.99"));
-        product.setProductType(ProductType.REAL);
-
-        em.persist(product);
         logger.info(product);
 
         em.getTransaction().commit();
