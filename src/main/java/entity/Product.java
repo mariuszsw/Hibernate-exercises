@@ -19,6 +19,10 @@ public class Product {
     @Column(name = "type")
     private ProductType productType;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private List<Review> reviews;
+
     public Long getId() {
         return id;
     }
@@ -75,6 +79,14 @@ public class Product {
         this.productType = productType;
     }
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -85,6 +97,7 @@ public class Product {
                 ", updated=" + updated +
                 ", price=" + price +
                 ", productType=" + productType +
+                ", reviews=" + reviews +
                 '}';
     }
 }
