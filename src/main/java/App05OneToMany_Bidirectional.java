@@ -16,12 +16,9 @@ public class App05OneToMany_Bidirectional {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
 
-        List<Review> reviews = em.createQuery("select r from Review r").getResultList();
-        for (Review review : reviews) {
-            logger.info(review);
-            logger.info(review.getProduct());
-        }
-        
+        Product product = em.find(Product.class, 1L);
+        em.remove(product);
+
         em.getTransaction().commit();
         em.close();
     }
