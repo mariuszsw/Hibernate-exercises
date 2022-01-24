@@ -1,9 +1,6 @@
 package entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Review {
@@ -12,6 +9,10 @@ public class Review {
     private Long id;
     private String content;
     private int rating;
+//    @Column(name = "product_id")
+//    private Long productId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Product product;
 
     public Long getId() {
         return id;
@@ -35,6 +36,14 @@ public class Review {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override

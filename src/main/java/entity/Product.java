@@ -19,8 +19,7 @@ public class Product {
     @Column(name = "type")
     private ProductType productType;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     private List<Review> reviews;
 
     public Long getId() {
@@ -97,7 +96,6 @@ public class Product {
                 ", updated=" + updated +
                 ", price=" + price +
                 ", productType=" + productType +
-                ", reviews=" + reviews +
                 '}';
     }
 }
