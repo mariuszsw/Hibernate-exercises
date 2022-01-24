@@ -5,27 +5,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class App01Update {
+public class App04Delete {
 
-    private static final Logger logger = LogManager.getLogger(App01Update.class);
+    private static final Logger logger = LogManager.getLogger(App04Delete.class);
     private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unit");
 
     public static void main(String[] args) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
 
-//        Product product = em.find(Product.class, 1L);
-//        product.setName("Nowy Rower 01");
-//        logger.info(product);
-
-//        Product merge = em.merge(product);
-//        logger.info(merge);
-
-        Product product = new Product();
-        product.setId(1L);
-        product.setName("Nowy Rower 02");
-        Product merge = em.merge(product);
-        logger.info(merge);
+        Product product = em.find(Product.class, 2L);
+        em.remove(product);
 
         em.getTransaction().commit();
         em.close();
