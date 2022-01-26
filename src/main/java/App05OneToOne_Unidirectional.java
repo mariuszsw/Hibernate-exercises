@@ -1,23 +1,23 @@
 import entity.Product;
-import entity.Review;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.List;
+import javax.persistence.PostRemove;
 
-public class App05OneToMany_Bidirectional {
+public class App05OneToOne_Unidirectional {
 
-    private static final Logger logger = LogManager.getLogger(App05OneToMany_Bidirectional.class);
+    private static final Logger logger = LogManager.getLogger(App05OneToOne_Unidirectional.class);
     private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unit");
 
     public static void main(String[] args) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
 
-        Product product = em.find(Product.class, 1L);
-        em.remove(product);
+        Product product = em.find(Product.class, 4L);
+        logger.info(product);
+        logger.info(product.getCategory().getName());
 
         em.getTransaction().commit();
         em.close();
