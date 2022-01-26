@@ -22,7 +22,10 @@ public class Product {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     private List<Review> reviews;
 
-    @OneToOne(fetch = FetchType.LAZY)
+//    @OneToOne(fetch = FetchType.LAZY)
+//    private Category category;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
     public Long getId() {

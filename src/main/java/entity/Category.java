@@ -1,9 +1,7 @@
 package entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Category {
@@ -12,6 +10,11 @@ public class Category {
     private Long id;
     private String name;
     private String description;
+
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "category")
+//    private Product product;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    private List<Product> product;
 
     public Long getId() {
         return id;
@@ -37,5 +40,11 @@ public class Category {
         this.description = description;
     }
 
+    public void setProduct(List<Product> product) {
+        this.product = product;
+    }
 
+    public List<Product> getProduct() {
+        return product;
+    }
 }
