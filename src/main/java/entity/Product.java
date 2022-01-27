@@ -3,7 +3,10 @@ package entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -28,10 +31,16 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(joinColumns = {@JoinColumn(name = "product_id")},
                inverseJoinColumns = {@JoinColumn(name = "attribute_id")})
-    private List<Attribute> attributes;
+    private Set<Attribute> attributes = new HashSet<>();
+
+    public void addAttributes(Attribute attribute){
+        attributes.add(attribute);
+        attribute.getProducts().add(this);
+    }
+
 
     public Long getId() {
         return id;
@@ -105,11 +114,7 @@ public class Product {
         this.category = category;
     }
 
-    public List<Attribute> getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(List<Attribute> attributes) {
+    public void setAttributes(Set<Attribute> attributes) {
         this.attributes = attributes;
     }
 
