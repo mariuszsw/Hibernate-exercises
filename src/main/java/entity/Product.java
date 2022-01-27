@@ -118,6 +118,10 @@ public class Product {
         this.attributes = attributes;
     }
 
+    public Set<Attribute> getAttributes() {
+        return attributes;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
